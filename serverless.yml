@@ -1,0 +1,43 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: helloword-lambda
+
+provider:
+  name: aws
+  runtime: dotnetcore2.1
+  stage: dev
+  region: eu-west-3
+
+package:
+  individually: true
+
+functions:
+  hello:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::Hello
+
+    # you can add packaging information here
+    package:
+      artifact: bin/release/netcoreapp2.1/hello.zip
+    events:
+      - http:
+          path: /api/hello
+          method: post
+          integration: lambda
+          cors: true
+          request: # configure the integration request
+            template:
+              application/json: $input.json('$')
+          response: # configure the integration response
+            body:
+              Content-Type: "'application/json'"
