@@ -1,2 +1,13 @@
-# serverless-lambda-dotnet
-Dotnet core lambda with serverless
+# Dotnet core lambda with serverless
+
+## Build
+
+```bash
+./build.cmd
+```
+
+## Deploy
+
+```bash
+serverless deploy
+```
